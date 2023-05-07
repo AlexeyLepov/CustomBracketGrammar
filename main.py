@@ -16,8 +16,11 @@ def custom_bracket_form(expr):
                 return False # Mismatched closing parenthesis
             stack.pop()
         elif last_char.isalpha() and ch.isalpha():
-            print(f"Error: One letter cannot be bracketed at position {i}")
-            return False # One letter cannot be bracketed
+            print(f"Error: One letter cannot be framed by brackets at position {i}")
+            return False # One letter cannot be framed by brackets
+        elif ch.isalpha() and stack and last_char in {'(', '['} and stack[-1] == last_char:
+            print(f"Error: One letter cannot be framed by brackets at position {i}")
+            return False # One letter cannot be framed by brackets
         last_char = ch
     if stack:
         print(f"Error: Extra '{stack[-1]}' at position {len(expr)}")
@@ -25,7 +28,6 @@ def custom_bracket_form(expr):
     return True
 
 while True:
-    # expression = "(a+b)/([a-b*c]([a-b]*(a+b)*(a*a+b*b)))"
     expression = input("Please enter your expression (press 'q' to quit): ")
     if expression == 'q':
         break

@@ -1,0 +1,134 @@
+функция operator():
+    если index < длина(ch) и ch[index] не содержится в "+-*/":
+        вернуть "error"
+
+функция letter():
+    если index < длина(ch) и ch[index] не содержится в "abcdefghijklmnopqrstuvwxyz":
+        вернуть "error"
+
+функция KSZ():
+    несмотря на локальную область видимости index, expression:
+        если index < длина(ch) и ch[index] содержится в "([":
+            expression = SZ1()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = operator()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = SZ2()
+            если expression:
+                вернуть expression
+        иначе, если index < длина(ch) и ch[index] содержится в "abcdefghijklmnopqrstuvwxyz":
+            expression = letter()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = operator()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = PSZ()
+            если expression:
+                вернуть expression
+        иначе:
+            вернуть "error"
+
+функция PSZ():
+    несмотря на локальную область видимости index, expression:
+        если index < длина(ch) и ch[index] содержится в "([":
+            expression = SZ1()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = KON2()
+            если expression:
+                вернуть expression
+        иначе, если index < длина(ch) и ch[index] содержится в "abcdefghijklmnopqrstuvwxyz":
+            expression = letter()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = KON1()
+            если expression:
+                вернуть expression
+        иначе:
+            вернуть "error"
+
+функция SZ1():
+    несмотря на локальную область видимости index, expression:
+        если index < длина(ch) и ch[index] равно '(':
+            index += 1
+            expression = KSZ()
+            если expression:
+                вернуть expression
+            если index == длина(ch) или ch[index] не равно ')':
+                вернуть "error"
+        иначе, если index < длина(ch) и ch[index] равно '[':
+            index += 1
+            expression = KSZ()
+            если expression:
+                вернуть expression
+            если index == длина(ch) или ch[index] не равно ']':
+                вернуть "error"
+        иначе:
+            вернуть "error"
+
+функция SZ2():
+    несмотря на локальную область видимости index, expression:
+        если index < длина(ch) и ch[index] содержится в "([":
+            expression = SZ1()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = KON3()
+            если expression:
+                вернуть expression
+        иначе, если index < длина(ch) и ch[index] содержится в "abcdefghijklmnopqrstuvwxyz":
+            expression = letter()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = KON1()
+            если expression:
+                вернуть expression
+        иначе:
+            вернуть "error"
+
+функция KON1():
+    несмотря на локальную область видимости index, expression:
+        если index < длина(ch) и ch[index] содержится в "+-*/":
+            expression = operator()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = PSZ()
+            если expression:
+                вернуть expression
+
+функция KON2():
+    несмотря на локальную область видимости index, expression:
+        если index < длина(ch) и ch[index] содержится в "+-*/":
+            expression = operator()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = SZ2()
+            если expression:
+                вернуть expression
+
+функция KON3():
+    несмотря на локальную область видимости index, expression:
+        если index < длина(ch) и ch[index] содержится в "+-*/":
+            expression = operator()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = letter()
+            если expression:
+                вернуть expression
+            index += 1
+            expression = KON1()
+            если expression:
+                вернуть expression

@@ -1,9 +1,13 @@
 # CustomBracketGrammar
 
-### Правильная скобочная запись арифметических выражений с двумя видами скобок. Подряд могут идти не более двух скобок одного вида. Не должно быть “лишних” скобок, и одна буква не может браться в скобки. 
+![](https://img.shields.io/tokei/lines/github.com/AlexeyLepov/CustomBracketGrammar?style=for-the-badge)
+![CodeSize](https://img.shields.io/github/languages/code-size/AlexeyLepov/CustomBracketGrammar?style=for-the-badge)
+![Repo](https://img.shields.io/github/repo-size/AlexeyLepov/CustomBracketGrammar?style=for-the-badge)
+![LastCommint](https://img.shields.io/github/last-commit/AlexeyLepov/CustomBracketGrammar?style=for-the-badge)
+![Releases](https://img.shields.io/github/downloads/AlexeyLepov/CustomBracketGrammar/total?style=for-the-badge)
 
-### Correct bracketing of arithmetic expressions with two kinds of brackets. No more than two parentheses of the same kind may go in a row. There must be no "extra" parentheses, and one letter cannot be bracketed.
+### Правильная скобочная запись арифметических выражений с двумя видами скобок. Подряд могут идти не более двух скобок одного вида. Не должно быть “лишних” скобок, и одна буква не может браться в скобки. 
 
 ------------------------------------------------------------------
 
-![clipboard_1683484299285](https://user-images.githubusercontent.com/77492646/236696055-18e2319d-3a62-4a1f-af05-8a624764869c.png)
+![image](https://github.com/AlexeyLepov/CustomBracketGrammar/assets/77492646/77e338f4-c87f-4901-9bec-d760ded48955)

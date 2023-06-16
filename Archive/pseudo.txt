@@ -1,0 +1,109 @@
+function KSZ() 
+{
+    если ch ∈  {`(`,`[`} то 
+    {
+        SZ1()
+        KON2()  
+    }
+	иначе если ch ∈  {a…z} то
+    { 
+        letter()
+        KON1()
+    }
+    иначе ошибка
+}
+
+function PSZ() 
+{
+	если ch ∈  {`(`,`[`} то 
+	{
+		SZ1()
+		sign()
+		SZ2()		
+	}
+	иначе если если ch ∈  {a…z} то     
+	{
+		letter()
+        sign()
+		KSZ()
+	}
+	иначе ошибка
+}
+
+function SZ1() 
+{
+	если ch == `(` то 
+	{
+		read()
+		PSZ()
+		если ch == `)` то
+            read()
+		иначе ошибка
+    }
+	иначе если ch == `[` то
+    {
+		read()
+        PSZ()
+		если ch == `]` то
+			read()
+		иначе ошибка
+	}
+	иначе ошибка
+}
+
+function SZ2() 
+{
+	если ch ∈  {`(`,`[`} то 
+	{
+		SZ1()
+		KON3()  
+	}
+	иначе если ch ∈  {a…z} то
+    { 
+		letter()
+        KON1()
+	}
+	иначе ошибка
+}
+
+function KON1() 
+{
+	если ch ∈  {+,*,-,/} то 
+	{
+		sign()
+		KSZ()  
+	}
+}
+
+function KON2() 
+{
+	если ch ∈  {+,*,-,/} то 
+	{
+		sign()
+		SZ2()
+	}         
+}
+
+function KON3() 
+{
+	если ch ∈  {+,*,-,/} то 
+	{
+		sign()
+		letter()
+		KON1()
+	}           
+}
+
+function sign() 
+{
+	если ch ∈ {+,*,-,/} то
+        read()
+	иначе ошибка
+}
+
+function letter() 
+{
+	если ch ∈ {a..z} то
+        read()
+	иначе ошибка
+}

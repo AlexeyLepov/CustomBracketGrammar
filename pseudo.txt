@@ -1,134 +1,220 @@
-функция operator():
-    если index < длина(ch) и ch[index] не содержится в "+-*/":
-        вернуть "error"
+function PSZ()
+{
+    если ch == `(` то
+    {
+   	 если ch == `(` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `)` то read()
+   	 иначе ошибка
+    	 KON5()
+    }
+    иначе если ch == `[` то
+    {
+    	 если ch == `[` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `]` то read()
+   	 иначе ошибка
+        KON4()
+    }
+    иначе если ch ∈ {a…z} то
+    {
+        letter()
+        KON1()
+    }
+    иначе ошибка
+}
 
-функция letter():
-    если index < длина(ch) и ch[index] не содержится в "abcdefghijklmnopqrstuvwxyz":
-        вернуть "error"
 
-функция KSZ():
-    несмотря на локальную область видимости index, expression:
-        если index < длина(ch) и ch[index] содержится в "([":
-            expression = SZ1()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = operator()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = SZ2()
-            если expression:
-                вернуть expression
-        иначе, если index < длина(ch) и ch[index] содержится в "abcdefghijklmnopqrstuvwxyz":
-            expression = letter()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = operator()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = PSZ()
-            если expression:
-                вернуть expression
-        иначе:
-            вернуть "error"
+function KSZ()
+{
+    если ch == `(` то
+    {
+   	 если ch == `(` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `)` то read()
+   	 иначе ошибка
+   	 sign()
+    	 SZ1()
+    }
+    иначе если ch == `[` то
+    {
+   	 если ch == `[` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `]` то read()
+   	 иначе ошибка
+   	 sign()
+    	 SZ2()
+    }
+    иначе если ch ∈ {a…z} то
+    {
+        letter()
+   	 sign()
+    	 PSZ()
+    }
+    иначе ошибка
+}
 
-функция PSZ():
-    несмотря на локальную область видимости index, expression:
-        если index < длина(ch) и ch[index] содержится в "([":
-            expression = SZ1()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = KON2()
-            если expression:
-                вернуть expression
-        иначе, если index < длина(ch) и ch[index] содержится в "abcdefghijklmnopqrstuvwxyz":
-            expression = letter()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = KON1()
-            если expression:
-                вернуть expression
-        иначе:
-            вернуть "error"
 
-функция SZ1():
-    несмотря на локальную область видимости index, expression:
-        если index < длина(ch) и ch[index] равно '(':
-            index += 1
-            expression = KSZ()
-            если expression:
-                вернуть expression
-            если index == длина(ch) или ch[index] не равно ')':
-                вернуть "error"
-        иначе, если index < длина(ch) и ch[index] равно '[':
-            index += 1
-            expression = KSZ()
-            если expression:
-                вернуть expression
-            если index == длина(ch) или ch[index] не равно ']':
-                вернуть "error"
-        иначе:
-            вернуть "error"
+function SZ1()
+{
+    если ch == `(` то
+    {
+   	 если ch == `(` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `)` то read()
+   	 иначе ошибка
+    	 KON2()
+    }
+    иначе если ch == `[` то
+    {
+        если ch == `[` то read()
+   	 иначе ошибка
+        KSZ()
+        если ch == `]` то read()
+   	 иначе ошибка
+    	 KON4()
+    }
+    иначе если ch ∈ {a…z} то
+    {
+        letter()
+        KON1()
+    }
+    иначе ошибка
+}
 
-функция SZ2():
-    несмотря на локальную область видимости index, expression:
-        если index < длина(ch) и ch[index] содержится в "([":
-            expression = SZ1()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = KON3()
-            если expression:
-                вернуть expression
-        иначе, если index < длина(ch) и ch[index] содержится в "abcdefghijklmnopqrstuvwxyz":
-            expression = letter()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = KON1()
-            если expression:
-                вернуть expression
-        иначе:
-            вернуть "error"
 
-функция KON1():
-    несмотря на локальную область видимости index, expression:
-        если index < длина(ch) и ch[index] содержится в "+-*/":
-            expression = operator()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = PSZ()
-            если expression:
-                вернуть expression
+function SZ3()
+{
+    если ch == `[` то
+    {
+   	 если ch == `[` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `]` то read()
+   	 иначе ошибка
+        KON4()
+    }
+    иначе если ch ∈ {a…z} то
+    {
+        letter()
+        KON1()
+    }
+    иначе ошибка
+}
 
-функция KON2():
-    несмотря на локальную область видимости index, expression:
-        если index < длина(ch) и ch[index] содержится в "+-*/":
-            expression = operator()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = SZ2()
-            если expression:
-                вернуть expression
 
-функция KON3():
-    несмотря на локальную область видимости index, expression:
-        если index < длина(ch) и ch[index] содержится в "+-*/":
-            expression = operator()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = letter()
-            если expression:
-                вернуть expression
-            index += 1
-            expression = KON1()
-            если expression:
-                вернуть expression
+function SZ2()
+{
+    если ch == `(` то
+    {
+   	 если ch == `(` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `)` то read()
+   	 иначе ошибка
+    	 KON5()
+    }
+    иначе если ch == `[` то
+    {
+   	 если ch == `[` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `]` то read()
+   	 иначе ошибка
+    	 KON3()
+    }
+    иначе если ch ∈ {a…z} то
+    {
+        letter()
+        KON1()
+    }
+    иначе ошибка
+}
+
+
+function SZ4()
+{
+    если ch == `(` то
+    {
+   	 если ch == `(` то read()
+   	 иначе ошибка
+   	 KSZ()
+   	 если ch == `)` то read()
+   	 иначе ошибка
+        KON5()
+    }
+    иначе если ch ∈ {a…z} то
+    {
+        letter()
+        KON1()
+    }
+    иначе ошибка
+}
+
+
+function KON1()
+{
+    если ch ∈ {+,*,-,/} то
+    {
+   	 sign()
+   	 PSZ()  
+    }
+}
+
+
+function KON2()
+{
+    если ch ∈ {+,*,-,/} то
+    {
+   	 sign()
+   	 SZ3()  
+    }
+}
+
+
+function KON3()
+{
+    если ch ∈ {+,*,-,/} то
+    {
+   	 sign()
+   	 SZ4()  
+    }
+}
+
+
+function KON4()
+{
+    если ch ∈ {+,*,-,/} то
+    {
+   	 sign()
+   	 SZ2()  
+    }
+}
+
+
+function KON5()
+{
+    если ch ∈ {+,*,-,/} то
+    {
+   	 sign()
+   	 SZ1()  
+    }
+}
+
+
+function sign()
+{
+    если ch ∈ {+,*,-,/} то read()
+}
+
+
+function letter()
+{
+    если ch ∈ {a..z} то read()
+    иначе ошибка
+}

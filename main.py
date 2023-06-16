@@ -1,151 +1,267 @@
-def CheckExpression(ch):
-    def operator():
-        if index < len(ch) and ch[index] not in "+-*/":
-            return "error"
-
-    def letter():
-        if index < len(ch) and ch[index] not in "abcdefghijklmnopqrstuvwxyz":
-            return "error"
-
-    def KSZ():
-        nonlocal index, expression
-        if index < len(ch) and ch[index] in "([":
-            expression = SZ1()
-            if expression:
-                return expression
-            index += 1
-            expression = operator()
-            if expression:
-                return expression
-            index += 1
-            expression = SZ2()
-            if expression:
-                return expression
-        elif index < len(ch) and ch[index] in "abcdefghijklmnopqrstuvwxyz":
-            expression = letter()
-            if expression:
-                return expression
-            index += 1
-            expression = operator()
-            if expression:
-                return expression
-            index += 1
-            expression = PSZ()
-            if expression:
-                return expression
+def PSZ():
+    global ch
+    if ch in {"("}:
+        if ch in {"("}:
+            read()
         else:
-            return "error"
-
-    def PSZ():
-        nonlocal index, expression
-        if index < len(ch) and ch[index] in "([":
-            expression = SZ1()
-            if expression:
-                return expression
-            index += 1
-            expression = KON2()
-            if expression:
-                return expression
-        elif index < len(ch) and ch[index] in "abcdefghijklmnopqrstuvwxyz":
-            expression = letter()
-            if expression:
-                return expression
-            index += 1
-            expression = KON1()
-            if expression:
-                return expression
+            raise Exception()
+        KSZ()
+        if ch in {")"}:
+            read()
+        else: 
+            raise Exception()
+        KON5()
+    elif ch in {"["}:
+        if ch in {"["}:
+            read()
         else:
-            return "error"
-
-    def SZ1():
-        nonlocal index, expression
-        if index < len(ch) and ch[index] == '(':
-            index += 1
-            expression = KSZ()
-            if expression:
-                return expression
-            if index == len(ch) or ch[index] != ')':
-                return "error"
-        elif index < len(ch) and ch[index] == '[':
-            index += 1
-            expression = KSZ()
-            if expression:
-                return expression
-            if index == len(ch) or ch[index] != ']':
-                return "error"
+            raise Exception()
+        KSZ()
+        if ch in {"]"}:
+            read()
         else:
-            return "error"
-
-    def SZ2():
-        nonlocal index, expression
-        if index < len(ch) and ch[index] in "([":
-            expression = SZ1()
-            if expression:
-                return expression
-            index += 1
-            expression = KON3()
-            if expression:
-                return expression
-        elif index < len(ch) and ch[index] in "abcdefghijklmnopqrstuvwxyz":
-            expression = letter()
-            if expression:
-                return expression
-            index += 1
-            expression = KON1()
-            if expression:
-                return expression
-        else:
-            return "error"
-
-    def KON1():
-        nonlocal index, expression
-        if index < len(ch) and ch[index] in "+-*/":
-            expression = operator()
-            if expression:
-                return expression
-            index += 1
-            expression = PSZ()
-            if expression:
-                return expression
-
-    def KON2():
-        nonlocal index, expression
-        if index < len(ch) and ch[index] in "+-*/":
-            expression = operator()
-            if expression:
-                return expression
-            index += 1
-            expression = SZ2()
-            if expression:
-                return expression
-
-    def KON3():
-        nonlocal index, expression
-        if index < len(ch) and ch[index] in "+-*/":
-            expression = operator()
-            if expression:
-                return expression
-            index += 1
-            expression = letter()
-            if expression:
-                return expression
-            index += 1
-            expression = KON1()
-            if expression:
-                return expression
-
-    expression = ''
-    index = 0
-    expression = PSZ()
-    if expression or len(ch) != index:
-        return "The entered expression does NOT satisfy the grammar!"
+            raise Exception()
+        KON4()
+    elif ch in latin:
+        letter()
+        KON1()
     else:
-        return "The entered expression satisfies the grammar!"
+        raise Exception()
+
+
+
+def KSZ():
+    global ch
+    if ch in {"("}:
+        if ch in {"("}:
+            read()
+        else:
+            raise Exception()
+        KSZ()
+        if ch in {")"}:
+            read()
+        else: 
+            raise Exception()
+        sign()
+        SZ1()
+    elif ch in {"["}:
+        if ch in {"["}:
+            read()
+        else:
+            raise Exception()
+        KSZ()
+        if ch in {"]"}:
+            read()
+        else:
+            raise Exception()
+        sign()
+        SZ2()
+    elif ch in latin:
+        letter()
+        sign()
+        PSZ()
+    else:
+        raise Exception()
+
+
+
+def SZ1():
+    global ch
+    if ch in {"("}:
+        if ch in {"("}:
+            read()
+        else:
+            raise Exception()
+        KSZ()
+        if ch in {")"}:
+            read()
+        else: 
+            raise Exception()
+        KON2()
+    elif ch in {"["}:
+        if ch in {"["}:
+            read()
+        else:
+            raise Exception()
+        KSZ()
+        if ch in {"]"}:
+            read()
+        else:
+            raise Exception()
+        KON4()
+    elif ch in latin:
+        letter()
+        KON1()
+    else:
+        raise Exception()
+
+
+
+def SZ3():
+    global ch
+    if ch in {"["}:
+        if ch in {"["}:
+            read()
+        else:
+            raise Exception()
+        KSZ()
+        if ch in {"]"}:
+            read()
+        else:
+            raise Exception()
+        KON4()
+    elif ch in latin:
+        letter()
+        KON1()
+    else:
+        raise Exception()
+
+
+
+def SZ2():
+    global ch
+    if ch in {"("}:
+        if ch in {"("}:
+            read()
+        else:
+            raise Exception()
+        KSZ()
+        if ch in {")"}:
+            read()
+        else: 
+            raise Exception()
+        KON5()
+    elif ch in {"["}:
+        if ch in {"["}:
+            read()
+        else:
+            raise Exception()
+        KSZ()
+        if ch in {"]"}:
+            read()
+        else:
+            raise Exception()
+        KON3()
+    elif ch in latin:
+        letter()
+        KON1()
+    else:
+        raise Exception()
+
+
+
+def SZ4():
+    global ch
+    if ch in {"("}:
+        if ch in {"("}:
+            read()
+        else:
+            raise Exception()
+        KSZ()
+        if ch in {")"}:
+            read()
+        else:
+            raise Exception()
+        KON5()
+    elif ch in latin:
+        letter()
+        KON1()
+    else:
+        raise Exception()
+    
+    
+   
+def KON1():
+    global ch
+    if ch in {"*","+","-","/"}:
+        sign()
+        PSZ()
+    
+    
+   
+def KON2():
+    global ch
+    if ch in {"*","+","-","/"}:
+        sign()
+        SZ3()
+    
+    
+   
+def KON3():
+    global ch
+    if ch in {"*","+","-","/"}:
+        sign()
+        SZ4()
+    
+    
+   
+def KON4():
+    global ch
+    if ch in {"*","+","-","/"}:
+        sign()
+        SZ2()
+    
+    
+   
+def KON5():
+    global ch
+    if ch in {"*","+","-","/"}:
+        sign()
+        SZ1()
+
+
+
+def letter():
+    global ch
+    if ch in latin:
+         read()
+    else:
+        raise Exception()
+
+
+
+def read():
+    global ch
+    global string
+    global current
+    current += 1
+    ch = string[current]
+
+
+
+def sign():
+    global ch
+    if ch in {"*","+","-","/"}:
+         read()
+
+
+
+latin = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+rule = """
+===========================================================================
+Правила
+===========================================================================
+Правильная скобочная запись арифметических выражений с двумя видами скобок. 
+Подряд могут идти не более двух скобок одного вида. 
+Не должно быть “лишних” скобок, и одна буква не может браться в скобки. 
+==========================================================================="""
+print(rule)
+
 
 
 while True:
-    expression = input("Enter your expression (or 'exit' to quit): ")
-    if expression == 'exit':
-        break
-    result = CheckExpression(expression)
-    print(result)
+    print("Введите выражение:")
+    string = f"{input()}#"
+    current = 0
+    ch = string[current]
+    
+    try:
+        PSZ()
+        print("Эта запись ПРАВИЛЬНАЯ!")
+    except BaseException:
+        print("Эта запись НЕПРАВИЛЬНАЯ!")
+
+    print("Попробовать снова?")
+    print("Ведите \"Y\" или \"N\": \n        ^")
+    if input() == "N":
+        exit()
